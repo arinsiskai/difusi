@@ -21,17 +21,6 @@ def analytic_solution(x, t):
     out = np.exp(-t) * 1 / (2 * np.sqrt(pi + 3)) * np.exp(-1/(4 * t)) + np.exp(-16 * t) * np.sin(4*x)
     return out
 
-# a = []
-# t = []
-# t0 = 1
-# for i in range (500):
-#     value = analytic_solution(x_space,t0)
-#     t.append(t0)
-#     t0 = t0 + dt
-#     a.append(value)
-# u = a[k]
-# k = k+1
-
 u = np.zeros((nx, nt))
 
 for i, x in enumerate(x_space):
@@ -72,32 +61,31 @@ def A(x):
     return out
 
 def psy_trial(x, net_out):
-    #out = A(x) + x * (1 - x) * net_out
-    out = A(x) + x[0] * (1 - x[0]) * x[1] * (1 - x[1]) * net_out
+    out = A(x) + x * (1 - x) * net_out
+    #out = A(x) + x[0] * (1 - x[0]) * x[1] * (1 - x[1]) * net_out
     return out
 
 def loss_function(W, x, t):
     loss_sum = 0.
 
     for xi in x:
-        for ti in t:
-            input_point = np.array([xi, ti])
-            net_out = neural_network(W, input_point)[0]
+        input_point = np.array(xi)
+        net_out = neural_network(W, input_point)[0]
 
-            net_out_jacobian = jacobian(neural_network_x)(input_point)
-            net_out_hessian = jacobian(jacobian(neural_network_x))(input_point)
+        net_out_jacobian = jacobian(neural_network_x)(input_point)
+        net_out_hessian = jacobian(jacobian(neural_network_x))(input_point)
 
-            psy_t = psy_trial(input_point, net_out)
-            psy_t_jacobian = jacobian(psy_trial)(input_point, net_out)
-            psy_t_hessian = jacobian(jacobian(psy_trial))(input_point, net_out)
+        psy_t = psy_trial(input_point, net_out)
+        psy_t_jacobian = jacobian(psy_trial)(input_point, net_out)
+        psy_t_hessian = jacobian(jacobian(psy_trial))(input_point, net_out)
 
-            gradient_of_trial_d2x = psy_t_hessian[0]
-            gradient_of_trial_dt = psy_t_jacobian[1]
+        gradient_of_trial_d2x = psy_t_hessian[0]
+        gradient_of_trial_dt = psy_t_jacobian[0]
 
-            func = f(input_point)
+        func = f(input_point)
 
-            err_sqr = ((gradient_of_trial_d2x - gradient_of_trial_dt) - func)**2
-            loss_sum = loss_sum + err_sqr
+        err_sqr = ((gradient_of_trial_d2x - gradient_of_trial_dt) - func)**2
+        loss_sum = loss_sum + err_sqr
     return loss_sum
 
 
@@ -122,8 +110,8 @@ surface2 = np.zeros((nx, nt))
 print("neural net solution...")
 for i, x in enumerate(x_space):
     for j, t in enumerate(t_space):
-        net_outt = neural_network(W, [x, t])[0]
-        surface2[i] = psy_trial([x, t], net_outt)
+        net_outt = neural_network(W, x)[0]
+        surface2[i] = psy_trial(x, net_outt)
 
 print surface2[:, 0]
 plt.plot(x_space, surface2[:, 0])
