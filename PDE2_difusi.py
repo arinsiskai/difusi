@@ -72,10 +72,6 @@ def loss_function(W, x, t):
         input_point = np.array(xi)
         net_out = neural_network(W, input_point)[0]
 
-        net_out_jacobian = jacobian(neural_network_x)(input_point)
-        net_out_hessian = jacobian(jacobian(neural_network_x))(input_point)
-
-        psy_t = psy_trial(input_point, net_out)
         psy_t_jacobian = jacobian(psy_trial)(input_point, net_out)
         psy_t_hessian = jacobian(jacobian(psy_trial))(input_point, net_out)
 
@@ -91,7 +87,7 @@ def loss_function(W, x, t):
 
 
 W = [npr.rand(2, 10), npr.randn(10, 1)]
-learning_rate = 0.001
+learning_rate = 0.01
 print loss_function(W, x_space, t_space)
 
 print neural_network(W, np.array([1, 1]))
@@ -110,9 +106,10 @@ surface2 = np.zeros((nx, nt))
 print("neural net solution...")
 for i, x in enumerate(x_space):
     for j, t in enumerate(t_space):
-        net_outt = neural_network(W, x)[0]
+        net_outt = neural_network(W, t)[0]
         surface2[i] = psy_trial(x, net_outt)
 
 print surface2[:, 0]
-plt.plot(x_space, surface2[:, 0])
+plt.plot(x_space, surface2[:, 0], 'r--', label="prediksi")
+plt.legend()
 plt.show()
