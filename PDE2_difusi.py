@@ -62,10 +62,10 @@ def A(x):
 
 def psy_trial(x, net_out):
     out = A(x) + x * (1 - x) * net_out
-    #out = A(x) + x[0] * (1 - x[0]) * x[1] * (1 - x[1]) * net_out
+    #out = A(x) + x[0] * (1 - x[0]) * x[1] * (1 - x[1]) * net_out (for 2D)
     return out
 
-def loss_function(W, x, t):
+def loss_function(W, x):
     loss_sum = 0.
 
     for xi in x:
@@ -88,14 +88,14 @@ def loss_function(W, x, t):
 
 W = [npr.rand(2, 10), npr.randn(10, 1)]
 learning_rate = 0.01
-print loss_function(W, x_space, t_space)
+print loss_function(W, x_space)
 
 print neural_network(W, np.array([1, 1]))
 
 print("init weight...")
 for i in range(200):
     print('%d' % i)
-    loss_grad = grad(loss_function)(W, x_space, t_space)
+    loss_grad = grad(loss_function)(W, x_space)
     W[0] = W[0] - learning_rate * loss_grad[0]
     W[1] = W[1] - learning_rate * loss_grad[1]
 
@@ -111,5 +111,6 @@ for i, x in enumerate(x_space):
 
 print surface2[:, 0]
 plt.plot(x_space, surface2[:, 0], 'r--', label="prediksi")
+plt.title("Perbandingan hasil Analitik dan prediksi dari NN")
 plt.legend()
 plt.show()
