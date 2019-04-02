@@ -18,6 +18,7 @@ dt = sigma * dx * dy / nu
 
 x_space = np.linspace(0, 1, nx)
 y_space = np.linspace(0, 1, ny)
+t_space = np.linspace(0, 1, nt)
 
 u = np.zeros((ny, nx))
 un = np.zeros((ny, nx))
@@ -48,12 +49,13 @@ def psy_trial(x, net_out):
     out = A(x) + x[0] * (1 - x[0]) * x[1] * (1 - x[1]) * net_out
     return out
 
-def loss_function(W, x, y):
+def loss_function(W, x, y, t):
     loss_sum = 0.
 
     for xi in x:
         for yi in y:
             input_point = np.array([xi, yi])
+            t_input = np.array(t)
             net_out = neural_network(W, input_point)[0]
 
             net_out_jacobian = jacobian(neural_network_x)(input_point)
@@ -62,10 +64,11 @@ def loss_function(W, x, y):
             psy_t = psy_trial(input_point, net_out)
             psy_t_jacobian = jacobian(psy_trial)(input_point, net_out)
             psy_t_hessian = jacobian(jacobian(psy_trial))(input_point, net_out)
+            psy_time_jacobian = jacobian(psy_trial)(t_input, net_out)
 
             gradient_of_trial_d2x = psy_t_hessian[0][0]
             gradient_of_trial_d2y = psy_t_hessian[1][1]
-            gradient_of_trial_dt = psy_t_jacobian[0]
+            gradient_of_trial_dt = psy_time_jacobian[0]
 
             func = f(input_point)
 
@@ -82,11 +85,11 @@ print neural_network(W, np.array([1, 1]))
 print("init weight...")
 for i in range(50):
     print('%d' % i)
-    loss_grad = grad(loss_function)(W, x_space, y_space)
+    loss_grad = grad(loss_function)(W, x_space, y_space, t_space)
     W[0] = W[0] - learning_rate * loss_grad[0]
     W[1] = W[1] - learning_rate * loss_grad[1]
 
-print loss_function(W, x_space, y_space)
+print loss_function(W, x_space, y_space, t_space)
 
 surface2 = np.zeros((ny, nx))
 surface = np.zeros((ny, nx))

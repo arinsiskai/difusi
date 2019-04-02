@@ -58,6 +58,7 @@ def neural_network_x(x):
 
 def A(x):
     out = np.sin(4 * x)
+    #out = 5 * x
     return out
 
 def psy_trial(x, net_out):
