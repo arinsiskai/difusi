@@ -30,7 +30,7 @@ for i, x in enumerate(x_space):
 print (np.shape(u))
 print (u[:, 10])
 
-plt.plot(x_space, u[:, 0], label='0 analitik')
+plt.plot(x_space, u[:, 1], label='0 analitik')
 plt.legend()
 
 
@@ -42,16 +42,6 @@ def sigmoid(x):
     return out
 
 def neural_network(W, x):
-    a1 = sigmoid(np.dot(x, W[0]))
-    out = np.dot(a1, W[1])
-    return out
-
-def neural_network_t(W, t):
-    a1 = sigmoid(np.dot(t, W[0]))
-    out = np.dot(a1, W[1])
-    return out
-
-def neural_network_x(x):
     a1 = sigmoid(np.dot(x, W[0]))
     out = np.dot(a1, W[1])
     return out
@@ -110,8 +100,8 @@ for i, x in enumerate(x_space):
         net_outt = neural_network(W, t)[0]
         surface2[i] = psy_trial(x, net_outt)
 
-print surface2[:, 0]
-plt.plot(x_space, surface2[:, 0], 'r--', label="prediksi")
-plt.title("Perbandingan hasil Analitik dan prediksi dari NN")
+print surface2[:, 2]
+plt.plot(x_space, surface2[:, 2], 'r--', label="prediksi")
+plt.title("Per bandingan hasil Analitik dan prediksi dari NN")
 plt.legend()
 plt.show()
