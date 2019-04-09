@@ -1,17 +1,31 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import autograd.numpy as np
+from autograd import grad, jacobian
+import autograd.numpy.random as npr
+from matplotlib import pyplot, cm
+from mpl_toolkits.mplot3d import Axes3D
 
 #plate size, mm
 
-w = h = 10
+w = h = 5
 #intervals in x-, y-, directions, mm
 dx = dy = 0.1
+
+x_space = np.linspace(0, w, w/dx)
+y_space = np.linspace(0, h, h/dy)
+
+print np.size(x_space)
+print np.size(y_space)
+
 #thermal diffusivity of stell, mm2.s-1
 D = 4
 
 Tcool, Thot = 300, 700
 
 nx, ny = int(w/dx), int(h/dy)
+print nx
+print ny
 
 dx2, dy2 = dx*dx, dy*dy
 dt = dx2 * dy2 / (2 * D * (dx2 + dy2))
@@ -57,4 +71,3 @@ cbar_ax = fig.add_axes([0.9, 0.15, 0.03, 0.7])
 cbar_ax.set_xlabel('$T$ / K', labelpad=20)
 fig.colorbar(im, cax=cbar_ax)
 plt.show()
-

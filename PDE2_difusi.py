@@ -86,6 +86,8 @@ print neural_network(W, np.array([1, 1]))
 print("init weight...")
 for i in range(200):
     print('%d' % i)
+    print loss_function(W, x_space)
+
     loss_grad = grad(loss_function)(W, x_space)
     W[0] = W[0] - learning_rate * loss_grad[0]
     W[1] = W[1] - learning_rate * loss_grad[1]
