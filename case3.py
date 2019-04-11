@@ -9,19 +9,21 @@ from mpl_toolkits.mplot3d import Axes3D
 
 #plate size, mm
 
-w = h = 2
+length = 2
+time = 2
 #intervals in x-, y-, directions, mm
 dx = dy = 0.1
 #thermal diffusivity of stell, mm2.s-1
 D = 4
 
-nx, ny = 10, 10
+nx = 10
+nt = 20
 print nx
-print ny
+print nt
 
 
-x_space = np.linspace(0, w, nx)
-y_space = np.linspace(0, h, ny)
+x_space = np.linspace(0, length, nx)
+y_space = np.linspace(0, time, nt)
 
 ### Neural Network ###
 
@@ -33,7 +35,7 @@ def sigmoid(x):
     out = 1. / (1. + np.exp(-x))
     return out
 
-def neural_network(W, x):
+def neural_network(W, x, t):
     a1 = sigmoid(np.dot(x, W[0]))
     out = np.dot(a1, W[1])
     return out
@@ -44,23 +46,7 @@ def neural_network_x(x):
     return out
 
 def A(x):
-    if ((x[0] <= 1. and x[0]>= 0.5) and (x[1] <= 1. and x[1]>= 0.5)):
-
-        f0 = 2
-        f1 = 2
-        g0 = 2
-        g1 = 2
-
-        #Dirichlet Boundary condition
-        #out = (1 - x[0]) * f0 + x[0] * f1 + (1 - x[1]) * (g0 - ((1 - x[0]) * g0 + x[0] * g0)) + x[1] * (g1 - ((1 - x[0]) * g1 + x[0] * g1))
-
-        #example dirichlet boundary condition
-        out = (1 - x[0]) * f0 + x[0] * f1 + (1 - x[1]) * (g0 - (2 * (1 - x[0]) + 2 * x[0])) + x[1] * (g1 - (2 * (1 - x[0]) + 2 * x[0]))
-    else:
-        out = (1 - x[0]) + x[0] + (1 - x[1]) * (1 - ((1 - x[0]) + x[0])) + x[1] * (1 - ((1 - x[0]) + x[0]))
-
-    #out = x[1] * np.sin(np.pi * x[0])
-    #out = x[0] * 2 * x[1]
+    out = (1 - x[1]) * np.sin(np.pi * x[0])
     return out
 
 def psy_trial(x, net_out):

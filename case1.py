@@ -1,4 +1,6 @@
 
+'''Solving Laplace Equation with PDE'''
+
 import matplotlib.pyplot as plt
 import autograd.numpy as np
 from autograd import grad, jacobian
@@ -7,26 +9,66 @@ from matplotlib import pyplot, cm
 np.random.seed(1)
 from mpl_toolkits.mplot3d import Axes3D
 
-#plate size, mm
 
-w = h = 2
-#intervals in x-, y-, directions, mm
-dx = dy = 0.1
-#thermal diffusivity of stell, mm2.s-1
-D = 4
+def plot2D(x, y, p):
+    fig = pyplot.figure(figsize=(11, 7), dpi=100)
+    ax = fig.gca(projection='3d')
+    X, Y = np.meshgrid(x, y)
+    surf = ax.plot_surface(X, Y, p[:], rstride=1, cstride=1, cmap=cm.viridis,
+            linewidth=0, antialiased=False)
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
+    ax.view_init(30, 225)
+    ax.set_xlabel('$x$')
+    ax.set_ylabel('$y$')
+    plt.show()
 
-nx, ny = 10, 10
-print nx
-print ny
+def laplace2d(p, y, dx, dy, l1norm_target):
+    l1norm = 1
+    pn = np.empty_like(p)
+
+    while l1norm > l1norm_target:
+        pn = p.copy()
+        p[1:-1, 1:-1] = ((dy ** 2 * (pn[1:-1, 2:] + pn[1:-1, 0:-2]) + dx ** 2 * (pn[2:, 1:-1] + pn[0:-2, 1:-1])) / (2. * (dx ** 2 + dy ** 2)))
+
+        p[:, 0] = 0  # p = 0 @ x = 0
+        p[:, -1] = y  # p = y @ x = 2
+        p[0, :] = p[1, :]  # dp/dy = 0 @ y = 0
+        p[-1, :] = p[-2, :]  # dp/dy = 0 @ y = 1
+        l1norm = (np.sum(np.abs(p[:]) - np.abs(pn[:])) /
+                  np.sum(np.abs(pn[:])))
+    return p
 
 
-x_space = np.linspace(0, w, nx)
-y_space = np.linspace(0, h, ny)
+#variabel declaration
+x = 1
+y = 1
+
+nx, ny = 31, 31
+c = 1
+dx = 2. / (nx - 1)
+dy = 2. / (ny - 1)
+
+x_space = np.linspace(0, x, nx)
+y_space = np.linspace(0, y, ny)
+
+##initial conditions
+p = np.zeros((ny, nx))  # create a XxY vector of 0's
+
+##boundary conditions
+p[:, 0] = 0  # p = 0 @ x = 0
+p[:, -1] = y_space  # p = y @ x = 2
+p[0, :] = p[1, :]  # dp/dy = 0 @ y = 0
+p[-1, :] = p[-2, :]  # dp/dy = 0 @ y = 1
+
+p = laplace2d(p, y_space, dx, dy, 1e-4)
+plot2D(x_space, y_space, p)
+
 
 ### Neural Network ###
 
 def f(x):
-    out = 0.
+    out = 0
     return out
 
 def sigmoid(x):
@@ -44,23 +86,7 @@ def neural_network_x(x):
     return out
 
 def A(x):
-    if ((x[0] <= 1. and x[0]>= 0.5) and (x[1] <= 1. and x[1]>= 0.5)):
-
-        f0 = 2
-        f1 = 2
-        g0 = 2
-        g1 = 2
-
-        #Dirichlet Boundary condition
-        #out = (1 - x[0]) * f0 + x[0] * f1 + (1 - x[1]) * (g0 - ((1 - x[0]) * g0 + x[0] * g0)) + x[1] * (g1 - ((1 - x[0]) * g1 + x[0] * g1))
-
-        #example dirichlet boundary condition
-        out = (1 - x[0]) * f0 + x[0] * f1 + (1 - x[1]) * (g0 - (2 * (1 - x[0]) + 2 * x[0])) + x[1] * (g1 - (2 * (1 - x[0]) + 2 * x[0]))
-    else:
-        out = (1 - x[0]) + x[0] + (1 - x[1]) * (1 - ((1 - x[0]) + x[0])) + x[1] * (1 - ((1 - x[0]) + x[0]))
-
-    #out = x[1] * np.sin(np.pi * x[0])
-    #out = x[0] * 2 * x[1]
+    out = x[0] * x[1]
     return out
 
 def psy_trial(x, net_out):
@@ -98,7 +124,7 @@ learning_rate = 0.001
 print neural_network(W, np.array([1, 1]))
 
 print("init weight...")
-for i in range(100):
+for i in range(200):
     print('%d' % i)
     print loss_function(W, x_space, y_space)
     #exit(0)
