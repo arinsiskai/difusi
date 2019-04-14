@@ -94,7 +94,7 @@ learning_rate = 0.001
 print neural_network(W, np.array([1, 1]))
 
 print("init weight...")
-for i in range(200):
+for i in range(500):
     print('%d' % i)
     print loss_function(W, x_space, y_space)
     #exit(0)
