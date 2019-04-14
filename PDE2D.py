@@ -75,11 +75,6 @@ def loss_function(W, x, y):
             input_point = np.array([xi, yi])
             net_out = neural_network(W, input_point)[0]
 
-            net_out_jacobian = jacobian(neural_network_x)(input_point)
-            net_out_hessian = jacobian(jacobian(neural_network_x))(input_point)
-
-            psy_t = psy_trial(input_point, net_out)
-            psy_t_jacobian = jacobian(psy_trial)(input_point, net_out)
             psy_t_hessian = jacobian(jacobian(psy_trial))(input_point, net_out)
 
             gradient_of_trial_d2x = psy_t_hessian[0][0]
