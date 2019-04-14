@@ -5,7 +5,21 @@
       <change afterPath="$PROJECT_DIR$/model-1-nn-PDE.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/model-2-nn-PDE.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/PDE2D.py" beforeDir="false" afterPath="$PROJECT_DIR$/PDE2D.py" afterDir="false" />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/PDE2_difusi.py" beforeDir="false" afterPath="$PROJECT_DIR$/PDE2_difusi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PDE2_difusi1.py" beforeDir="false" afterPath="$PROJECT_DIR$/PDE2_difusi1.py" afterDir="false" />
+>>>>>>> 4390828ddf4371e106746e71fd00ef1a0b8887a8
+=======
+      <change beforePath="$PROJECT_DIR$/PDE1.py" beforeDir="false" afterPath="$PROJECT_DIR$/PDE1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PDE2_difusi.py" beforeDir="false" afterPath="$PROJECT_DIR$/PDE2_difusi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trialPDE.py" beforeDir="false" afterPath="$PROJECT_DIR$/trialPDE.py" afterDir="false" />
+>>>>>>> 5bfb365f67640fd903e020e9db80860211308743
+>>>>>>> 4d41d29bd877ddab8f6cca17b6edb28f94871809
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +28,44 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <splitter split-orientation="horizontal" split-proportion="0.67223066">
+=======
+<<<<<<< HEAD
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PDE2_difusi.py">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="-36">
+              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+=======
+            <state relative-caret-position="-191">
+              <caret line="85" column="19" lean-forward="true" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/PDE2_difusi1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="268">
+              <caret line="114" column="17" lean-forward="true" selection-start-line="114" selection-start-column="17" selection-end-line="114" selection-end-column="17" />
+>>>>>>> 4390828ddf4371e106746e71fd00ef1a0b8887a8
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+=======
+    <splitter split-orientation="horizontal" split-proportion="0.1">
+>>>>>>> 4d41d29bd877ddab8f6cca17b6edb28f94871809
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -100,6 +151,7 @@
         <option value="Python Script" />
       </list>
     </option>
+>>>>>>> 5bfb365f67640fd903e020e9db80860211308743
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -349,16 +401,33 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+=======
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
+>>>>>>> 4390828ddf4371e106746e71fd00ef1a0b8887a8
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.18664643" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2913257" />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32974428" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2111293" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2913257" />
+>>>>>>> 5bfb365f67640fd903e020e9db80860211308743
+>>>>>>> 4d41d29bd877ddab8f6cca17b6edb28f94871809
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
+>>>>>>> 4390828ddf4371e106746e71fd00ef1a0b8887a8
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32974428" />
@@ -433,8 +502,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PDE2_difusi.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="351">
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <state relative-caret-position="-36">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+=======
+        <state relative-caret-position="-191">
+          <caret line="85" column="19" lean-forward="true" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
+=======
+        <state relative-caret-position="1394">
+>>>>>>> 4d41d29bd877ddab8f6cca17b6edb28f94871809
           <caret line="88" column="35" selection-start-line="88" selection-start-column="35" selection-end-line="88" selection-end-column="35" />
+>>>>>>> 5bfb365f67640fd903e020e9db80860211308743
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
@@ -443,8 +525,18 @@
     </entry>
     <entry file="file://$USER_HOME$/Miniconda2/Lib/site-packages/numpy/core/fromnumeric.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="133">
           <caret line="82" selection-start-line="82" selection-end-line="82" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="268">
+          <caret line="114" column="17" lean-forward="true" selection-start-line="114" selection-start-column="17" selection-end-line="114" selection-end-column="17" />
+>>>>>>> 4390828ddf4371e106746e71fd00ef1a0b8887a8
+=======
+        <state relative-caret-position="697">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+>>>>>>> 4d41d29bd877ddab8f6cca17b6edb28f94871809
         </state>
       </provider>
     </entry>
@@ -457,8 +549,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/numerikPDE2D.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="337">
           <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
+=======
+        <state relative-caret-position="121">
+          <caret line="135" selection-start-line="135" selection-end-line="135" selection-end-column="18" />
+>>>>>>> 5bfb365f67640fd903e020e9db80860211308743
+>>>>>>> 4d41d29bd877ddab8f6cca17b6edb28f94871809
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
