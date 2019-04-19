@@ -15,7 +15,7 @@ dt = 1 / nt
 k = 1
 
 x_space = np.linspace(0, 1, nx)
-t_space = np.linspace(0, 5, nt)
+t_space = np.linspace(0, 20, nt)
 
 def analytic_solution(x, t):
     out = np.exp(-t) * 1 / (2 * np.sqrt(pi + 3)) * np.exp(-1/(4 * t)) + np.exp(-16 * t) * np.sin(4*x)
@@ -84,7 +84,7 @@ print loss_function(W, x_space)
 print neural_network(W, np.array([1, 1]))
 
 print("init weight...")
-for i in range(200):
+for i in range(10):
     print('%d' % i)
     print loss_function(W, x_space)
 
@@ -100,7 +100,7 @@ print("neural net solution...")
 for i, x in enumerate(x_space):
     for j, t in enumerate(t_space):
         net_outt = neural_network(W, t)[0]
-        surface2[i] = psy_trial(x, net_outt)
+        surface2[i][j] = psy_trial(x, net_outt)
 
 print surface2[:, 2]
 plt.plot(x_space, surface2[:, 2], 'r--', label="prediksi")

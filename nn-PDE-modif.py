@@ -2,12 +2,20 @@ import autograd.numpy as np
 from autograd import grad, jacobian
 import matplotlib.pyplot as plt
 
-N = 100     # input size
+nData = 100     # input size
 H1 = 100     # Hidden layer size
 H2 = 50
-Out = 50      # Output size
+Out = 1      # Output size
 
-W1 = np.random.randn(N, H1)
+x_space = np.linspace(0, 1, nData)
+y_space = np.linspace(0, 1, nData)
+
+inputN = np.array((x_space, y_space))
+
+N = np.reshape(inputN, np.size(inputN))
+
+W1 = np.random.randn(np.size(N), H1)
+
 b1 = np.random.randn(H1)
 
 W2 = np.random.randn(H1, H2)
@@ -15,10 +23,6 @@ b2 = np.random.randn(H2)
 
 W3 = np.random.randn(H2, Out)
 b3 = np.random.randn(Out)
-
-x_space = np.linspace(0, 1, N)
-y_space = np.linspace(0, 1, N)
-
 
 
 def sigmoid(X):
@@ -39,7 +43,7 @@ def sigmoid_backward(dA, X):
 
 def relu_backward(dA, Z):
     dZ = np.array(dA, copy=True)
-    dZ[Z <= 0] = 0;
+    dZ[Z <= 0] = 0
     return dZ
 
 
@@ -57,27 +61,21 @@ def ffpass_np(x):
     return out
 
 
+out_ffpassx = ffpass_np(x_space)
+out_ffpassy = ffpass_np(y_space)
+
+
 def A(x):
-    if ((x[0] <= 1 and x[0]>= 0.5) and (x[1] <= 1 and x[1]>= 0.5)):
-
-        f0 = 2
-        f1 = 2
-        g0 = 2
-        g1 = 2
-        out = (1 - x[0]) * f0 + x[0] * f1 + (1 - x[1]) * (g0 - ((1 - x[0]) * g0 + x[0] * g0)) + x[1] * (g1 - ((1 - x[0]) * g1 + x[0] * g1))
-        #out = (1 - x[0]) * f0 + x[0] * f1 + (1 - x[1]) * (g0 - (2 * (1 - x[0]) + 2 * x[0])) + x[1] * (g1 - (2 * (1 - x[0]) + 2 * x[0]))
-    else:
-        out = 0
-
-    #out = x[0]
-    #out = x[1] * np.sin(np.pi * x[0])
-    #out = x[0] * 2 * x[1]
+    out = x[1] * np.sin(np.pi * x[0])
     return out
-
 
 def psy_trial(x, net_out):
     out = A(x) + x[0] * (1 - x[0]) * x[1] * (1 - x[1]) * net_out
     return out
+
+
+out_psy_trial = psy_trial(N, ffpass_np(N))
+
 
 def f(x):
     return 0.
@@ -105,7 +103,9 @@ def loss_function(x, y):
 
 learning_rate = 0.01
 
-print ffpass_np(x_space)
+print loss_function(x_space, y_space)
+
+
 
 print("init weight...")
 for i in range(500):
