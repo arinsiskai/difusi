@@ -3,7 +3,7 @@ import autograd.numpy as np
 from autograd import grad, jacobian
 import autograd.numpy.random as npr
 from matplotlib import pyplot, cm
-np.random.seed(1)
+np.random.seed(50)
 from mpl_toolkits.mplot3d import Axes3D
 
 ### Neural Network ###
@@ -37,18 +37,8 @@ def A(x):
     return out
 
 def psy_trial(x, net_out):
-    out = A(x) + x[0] * (1 - x[0]) * x[1] * (1 - x[1]) * net_out
+    out = A(x) * 0.003 + x[0] * (1 - x[0]) * x[1] * (1 - x[1]) * net_out
     return out
-
-
-nx = 10
-nt = 10
-w = 1
-t = 10
-x_space = np.linspace(0, w, nx)
-t_space = np.linspace(0, t, nt)
-W = [npr.rand(2, 10), npr.rand(10, 1)]
-b = [np.zeros(np.size(W[0][0])), np.zeros(np.size(W[1]))]
 
 
 def loss_function(W, x, y, b):
@@ -66,13 +56,24 @@ def loss_function(W, x, y, b):
             
             func = f(input_point)
 
-            err_sqr = ((D * gradient_of_trial_d2x - gradient_of_trial_dt) - func)**2
+            err_sqr = (gradient_of_trial_dt - D * gradient_of_trial_d2x - func)**2
             loss_sum = loss_sum + err_sqr
 
     return loss_sum
 
 
-loss = loss_function(W, x_space, t_space, b)
+nx = 100
+nt = 100
+w = 1
+t = 100
+x_space = np.linspace(0, w, nx)
+t_space = np.linspace(0, t, nt)
+W = [npr.rand(2, 10), npr.rand(10, 1)]
+b = [np.zeros(np.size(W[0][0])), np.zeros(np.size(W[1]))]
+input = np.asarray(x_space)
+#input2 = input.reshape(10, 1)
+
+#loss = loss_function(W, x_space, t_space, b)
 
 
 loss = []
@@ -102,12 +103,12 @@ surface = np.zeros((nx, nt))
 for i, t in enumerate(t_space):
     for j, x in enumerate(x_space):
         net_out_result = neural_network(W, [x, t], b)[0]
-        surface[i][j] = psy_trial([x, t], net_out_result) * 0.003
+        surface[i][j] = psy_trial([x, t], net_out_result)
 
 print surface
 
 
-X, Y = np.meshgrid(x_space, t_space)
+X, Y = np.meshgrid(x_space, np.flip(t_space))
 fig = plt.figure()
 ax = fig.gca(projection='3d')
 surf = ax.plot_surface(X, Y, surface, cmap=cm.coolwarm, linewidth=0, antialiased=False)
@@ -116,6 +117,8 @@ ax.set_xlabel('$x$')
 ax.set_ylabel('$t$')
 plt.show()
 
+plt.plot(epoch, loss)
+plt.show()
 
 exit(0)
 
